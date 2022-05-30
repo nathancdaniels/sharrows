@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Bike_Sharrows_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:7
+        }).fitBounds([[-34.880958547333385,138.65353367933932],[-34.87665274160343,138.66154456851254]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleStreets_0');
+        map.getPane('pane_GoogleStreets_0').style.zIndex = 400;
+        var layer_GoogleStreets_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleStreets_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 7,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleStreets_0;
+        map.addLayer(layer_GoogleStreets_0);
+        function pop_Bike_Sharrows_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ogr_fid'] !== null ? autolinker.link(feature.properties['ogr_fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['attribute'] !== null ? autolinker.link(feature.properties['attribute'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Spatial_ID'] !== null ? autolinker.link(feature.properties['Spatial_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Bike_Sharrows_1_0(feature) {
+            switch(String(feature.properties['attribute'])) {
+                case 'Left':
+                    return {
+                pane: 'pane_Bike_Sharrows_1',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Right':
+                    return {
+                pane: 'pane_Bike_Sharrows_1',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,102,227,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Straight':
+                    return {
+                pane: 'pane_Bike_Sharrows_1',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Bike_Sharrows_1',
+                radius: 7.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,239,101,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Bike_Sharrows_1');
+        map.getPane('pane_Bike_Sharrows_1').style.zIndex = 401;
+        map.getPane('pane_Bike_Sharrows_1').style['mix-blend-mode'] = 'normal';
+        var layer_Bike_Sharrows_1 = new L.geoJson(json_Bike_Sharrows_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Bike_Sharrows_1',
+            layerName: 'layer_Bike_Sharrows_1',
+            pane: 'pane_Bike_Sharrows_1',
+            onEachFeature: pop_Bike_Sharrows_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Bike_Sharrows_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Bike_Sharrows_1);
+        map.addLayer(layer_Bike_Sharrows_1);
+        setBounds();
+        var i = 0;
+        layer_Bike_Sharrows_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Spatial_ID'] !== null?String('<div style="color: #323232; font-size: 10pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Spatial_ID']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Bike_Sharrows_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Bike_Sharrows_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Bike_Sharrows_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Bike_Sharrows_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Bike_Sharrows_1]);
+        });
+        </script>
+    </body>
+</html>
